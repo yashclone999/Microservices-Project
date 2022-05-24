@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.6.7</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.serverless</groupId>
+	<artifactId>functionApp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>functionApp</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+	
+	
+		<java.version>8</java.version>
+		<spring-cloud-azure.version>4.0.0</spring-cloud-azure.version>
+		<spring-cloud.version>2021.0.2</spring-cloud.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		
+		<azure.functions.java.library.version>1.4.2</azure.functions.java.library.version>
+		<azure.functions.maven.plugin.version>1.13.0</azure.functions.maven.plugin.version>
+		
+		<functionResourceGroup>practice-azure</functionResourceGroup>
+		<functionAppName>MailBooking</functionAppName>
+		<functionAppRegion>Central US</functionAppRegion>
+		<stagingDirectory>${project.build.directory}/azure-functions/${functionAppName}</stagingDirectory>
+		
+		<start-class>com.serverless.functionApp.FunctionAppApplication</start-class>
+		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      	<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+	</properties>
+	<dependencies>
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency> 
+		<dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-function-adapter-azure</artifactId>
+        </dependency>
+		<dependency>
+			<groupId>com.azure.spring</groupId>
+			<artifactId>spring-cloud-azure-starter</artifactId>
+		</dependency>
+		<dependency>
+    		<groupId>com.microsoft.azure</groupId>
+    		<artifactId>azure-keyvault</artifactId>
+    		<version>1.2.6</version>
+		</dependency>
+	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				  <groupId>com.azure.spring</groupId>
+				  <artifactId>azure-spring-boot-bom</artifactId>
+				  <version>3.2.0</version>
+				  <type>pom</type>
+			</dependency>
+			<dependency>
+			    <groupId>org.springframework.cloud</groupId>
+			    <artifactId>spring-cloud-function-dependencies</artifactId>
+			    <version>3.2.0</version>
+			    <type>pom</type>
+			    <scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.azure.spring</groupId>
+				<artifactId>spring-cloud-azure-dependencies</artifactId>
+				<version>${spring-cloud-azure.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+		
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+		
+			<!-- Order of plugins is important - to do with preparation of classes like adapter/handeler that spring will use later -->
+            <plugin>
+                <groupId>com.microsoft.azure</groupId>
+                <artifactId>azure-functions-maven-plugin</artifactId>
+                <configuration>
+                    <resourceGroup>${functionResourceGroup}</resourceGroup>
+                    <appName>${functionAppName}</appName>
+                    <region>${functionAppRegion}</region>
+                    <runtime>
+                        <os>windows</os>
+                        <javaVersion>11</javaVersion>
+                    </runtime>
+                    <appSettings>
+                        <!-- Run Azure Function from package file by default -->
+                        <property>
+                            <name>FUNCTIONS_EXTENSION_VERSION</name>
+                            <value>~4</value>
+                        </property>
+                        <property>
+                            <name>FUNCTIONS_WORKER_RUNTIME</name>
+                            <value>java</value>
+                        </property>
+                    </appSettings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>package-functions</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <version>${azure.functions.maven.plugin.version}</version>
+            </plugin>
+            
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>
+                                ${project.build.directory}/azure-functions/${functionAppName}
+                            </outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/main/azure
+                                    </directory>
+                                    <includes>
+                                        <include>**</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${stagingDirectory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteIfNewer>true</overWriteIfNewer>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+            </plugin>
+            
+            <plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+	
+	<repositories>
+      <repository>
+         <id>repository.spring.release</id>
+         <name>Spring GA Repository</name>
+         <url>http://repo.spring.io/release</url>
+      </repository>
+   </repositories>
+
+</project>

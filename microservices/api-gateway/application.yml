@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods:
+            - GET
+            - POST
+            - OPTIONS
+            allowedHeaders: '*'
+
+---
+spring:
+  application:
+    name: api-gateway
+      
+---
+
+server:
+  port: 8765

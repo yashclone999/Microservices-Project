@@ -1,0 +1,6 @@
+Maven Run Configurations:
+
+build az functions : clean package
+deploy functions : azure-functions:deploy
+run az-functions locally : azure-functions:run -DenableDebug
+build Util : install:install-file -Dfile=C:\Users\yashc\eclipse-workspace\<folder-name>\Utils\target\Utils-0.0.1-SNAPSHOT.jar -DgroupId=com.utils -DartifactId=Utils -Dversion=0.0.1-SNAPSHOT

@@ -1,0 +1,46 @@
+package com.microservices.application.producer;
+
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.KafkaException;
+
+import com.exceptions.KafkaRuntimeException;
+import com.models.BookingNotification;
+
+public class BookingNotifier implements Runnable{
+	
+	private final BookingNotification data;
+	private final Producer producer;
+	
+	public BookingNotifier(BookingNotification data) {
+		this.data = data;
+		this.producer = Producer.getInstance();
+	}
+	
+	@Override
+	public void run(){
+		
+		ProducerRecord<String, BookingNotification> producerRecord = null;
+		String key = "";
+		
+		try {
+			key = Integer.valueOf(data.getBookingID()).toString();
+			producerRecord = new ProducerRecord<>("BookingUpdates", key, data);
+			
+		}catch(Exception e) {
+			throw new KafkaRuntimeException(e.getMessage());
+		}
+		
+		producer.initTransactions();
+
+		/* Transaction API - works only with 3 or more Kafka brokers */
+		try {
+		     producer.beginTransaction();
+		     producer.send(producerRecord);
+		     producer.commitTransaction();
+		 } catch (KafkaException e) {
+		     producer.abortTransaction();
+		     throw new KafkaRuntimeException("Kafka producer - message transmission failed/n"+e.getMessage());
+		 }
+		/* producer.close(); need to check if this can be closed here */
+	}
+}

@@ -1,0 +1,11 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+      "AzureWebJobsStorage": "",
+      "FUNCTIONS_WORKER_RUNTIME": "java",
+      "MAIN_CLASS":"com.serverless.functionApp.FunctionAppApplication",
+      "JAVA_HOME":"C:/Program Files/Java/jdk-11.0.12",
+      "AzureWebJobsDashboard": "",
+      "MyBindingConnection": "<service-bus-connection-string>"
+    }
+  }
