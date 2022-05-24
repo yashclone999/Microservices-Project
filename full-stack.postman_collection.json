@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "ea1bee0a-e26a-4e5c-af42-94aacde833e3",
+		"name": "full-stack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11931648"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/booking/book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomID\" : 1,\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-17\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 20,\r\n    \"price\" : 30,\r\n    \"mail\" : \"yashclone999@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/booking/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"booking",
+						"book"
+					]
+				},
+				"description": "Post request with form data for booking api"
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location\" : \"Delhi\",\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-16\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 3,\r\n    \"priceStart\" : 22.5,\r\n    \"priceEnd\" : 30,\r\n    \"numDays\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/rooms/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rooms",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/rooms/search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location\" : \"Delhi\",\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-17\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 90,\r\n    \"priceStart\" : 10,\r\n    \"priceEnd\" : 100,\r\n    \"numDays\" : 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/rooms/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rooms",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8765/search/rooms/search",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location\" : \"Delhi\",\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-16\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 3,\r\n    \"priceStart\" : 22.5,\r\n    \"priceEnd\" : 30,\r\n    \"numDays\" : 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/search/rooms/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"search",
+						"rooms",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8765/booking/book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomID\" : 1,\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-17\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 1,\r\n    \"price\" : 22.5,\r\n    \"mail\" : \"abc@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/booking/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"booking",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/payments/success",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingID\" : 9,\r\n    \"userID\" : \"abc@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payments/success",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payments",
+						"success"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH_ROOMS",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"location\" : \"Delhi\",\r\n    \"startDate\" : \"2022-07-15\",\r\n    \"endDate\" : \"2022-07-17\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 20,\r\n    \"priceStart\" : 10,\r\n    \"priceEnd\" : 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/rooms/search",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"rooms",
+						"search"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BOOK_ROOM_1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomID\" : 1,\r\n    \"startDate\" : \"2022-07-17\",\r\n    \"endDate\" : \"2022-07-17\",\r\n    \"userID\" : 2,\r\n    \"numRooms\" : 2,\r\n    \"price\" : 30,\r\n    \"mail\" : \"yashclone999@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/booking/book",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"booking",
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONFIRM_ROOM_1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingID\" : 53,\r\n    \"userID\" : \"yashclone999@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payments/success",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payments",
+						"success"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MAIL_TEST",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/mail/send",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"mail",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SEARCH_APIGATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BOOK_RESERVE_APIGATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8765/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CONFIRM_BOOKING_APIGATEWAY",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingID\" : 56,\r\n    \"userID\" : \"yashclone999@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8765/payments/success",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8765",
+					"path": [
+						"payments",
+						"success"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
