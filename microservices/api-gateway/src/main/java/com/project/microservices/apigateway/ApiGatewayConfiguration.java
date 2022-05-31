@@ -38,6 +38,11 @@ public class ApiGatewayConfiguration {
 			                    )
 						.uri("lb://search-service") )
 				///////////////////////////////////////
+				.route(p -> p.path("/rooms/locations")
+						.filters(f -> f.setResponseHeader("Access-Control-Allow-Origin", "http://localhost:4200")
+			                    )
+						.uri("lb://search-service") )
+				///////////////////////////////////////
 				.build();
 	}
 }

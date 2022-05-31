@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.functionalInterfaces.FunctionalInterfacesImpl;
 import com.exceptions.*;
 import com.search.service.search.DAO.AvailableRoomDAO;
+import com.search.service.search.DAO.HotelDAO;
 import com.search.service.search.DAO.RoomDAO;
 import com.search.service.search.models.FormData;
 import com.search.service.search.models.Room;
@@ -25,6 +26,9 @@ public class SearchService {
 	
 	@Autowired
 	RoomDAO roomDAO;
+	
+	@Autowired
+	HotelDAO hotelDAO;
 	
 	public List<Room> search(FormData data) throws Exception{
 		
@@ -45,5 +49,11 @@ public class SearchService {
 		if(FunctionalInterfacesImpl.checkNullList.test(rooms)) throw new RoomsNotAvailable("Rooms not available");
 		
 		return rooms;
+	}
+	
+	public List<String> locations(){
+		Set<String> locations = new HashSet<>();
+		hotelDAO.findAll().forEach(hotel -> locations.add(hotel.getLocation()));
+		return new ArrayList<String>(locations);
 	}
 }
