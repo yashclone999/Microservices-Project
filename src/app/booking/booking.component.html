@@ -1,0 +1,30 @@
+<div class="container">
+
+  <div *ngIf="details.length === 0">
+    <h3>Loading..</h3>
+  </div>
+
+  <div *ngIf="details.length > 0">
+    <div class="row">
+      <div class="col-12">
+        <h2>{{details[0].name}} : {{details[0].code}}/{{details[0].hashCode}}</h2>
+      </div>
+    </div>
+
+    <mat-card *ngFor="let detail of details; let i = index" style="background-color:rgba(150, 179, 246, 0.69); color:black">
+      <mat-card-content >
+        <div class="row" >
+          <div class="col-12">
+
+            <p><label>Time</label> : {{detail.departure}} - {{detail.arrival}}</p>
+            <p><label>Price</label> :{{detail.price}}</p>
+            <p><label>Seats Left</label> :{{detail.seats_left}}</p>
+            <button class="btn btn-primary" (click)="onSelect(i)">Pay</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

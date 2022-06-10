@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-xs-12">
+        <button class="btn btn-success" (click)="readAbout()">About</button>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-xs-12">
+        <app-search-item *ngFor="let location of locations; let i = index"
+                         [l]="location"
+                         [index]="i"></app-search-item>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+

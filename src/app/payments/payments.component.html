@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-12">
+
+    <div class="row">
+      <div class="col-12">
+        <h2>Payments</h2>
+      </div>
+    </div>
+
+    <mat-card style="background-color:rgba(150, 179, 246, 0.69); color:black">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <p><Label>Flight : </Label>{{paymentDetails.name}}</p>
+            <p><Label>Code : </Label>{{paymentDetails.code}}</p>
+            <p><Label>Time : </Label>{{paymentDetails.departure}} - {{paymentDetails.arrival}}</p>
+            <p><Label>Price : </Label>{{paymentDetails.price}}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    
+    <mat-card >
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <button class="btn btn-success" (click)="makePayment()">Pay</button>
+            <button class="btn btn-primary" (click)="return()">Revise Booking</button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+
+
+    <mat-card  *ngIf="message" style="background-color:rgba(245, 101, 101, 0.54); color:black">
+      <mat-card-content>
+        <div class="row">
+          <div class="col-12">
+            <p>{{message}}</p>
+
+
+            <mat-card *ngIf="transcript" style="background-color:rgba(150, 179, 246, 0.69); color:black">
+              <mat-card-content>
+                <div class="row">
+                  <div class="col-12">
+                    <p><Label>User : </Label>{{transcript.user}}</p>
+                    <p><Label>Flight : </Label>{{transcript.name}}</p>
+                    <p><Label>Code : </Label>{{transcript.code}}</p>
+                    <p><Label>Time : </Label>{{transcript.departure}} - {{paymentDetails.arrival}}</p>
+                    <p><Label>Price : </Label>{{transcript.price}}</p>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+
+
+  </div>
+</div>
